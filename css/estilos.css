@@ -1,0 +1,63 @@
+* {
+    font-family: 'Barlow condensed', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.encabezado {
+    background-color: indigo;
+    color: whitesmoke;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+    text-align: center;
+}
+
+.texto-encabezado {
+    background-color: plum;
+    color: black;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+    text-align: center;
+}
+
+.miga-de-pan {
+    text-align="left";
+    padding: 10px;
+}
+
+.pie-de-pagina {
+    background-color: indigo;
+    color: whitesmoke;
+    margin-top: 10px;
+    padding: 5px;
+    width: 100%;
+    border: 20px solid;
+    border-color: white;
+}
+
+.direccion {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.texto-rrss {
+    text-align: right;
+    vertical-align: top;
+    width: 100px;
+}
+
+.iconos-rrss {
+    text-align: right;
+    width: 140px;
+}
+
+.lista-mascotas {
+    align-items: center;
+    margin-top: 20px;
+    text-align: center;
+
+}
+
+.fila-mascotas {
+    padding-bottom: 20px;
+}
+
+.tabla-ficha {
+    margin-top: 20px;
+}
