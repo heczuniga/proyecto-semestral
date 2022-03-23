@@ -1,0 +1,58 @@
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+#menu {
+    width: 20%;
+    background-color: blue;
+    vertical-align: top;
+    background-color: #333333;
+    color: whitesmoke;
+    padding: 20px;
+}
+
+a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+a:hover {
+    color: grey;
+}
+
+.texto1 {
+    background-color: turquoise;
+    color: whitesmoke;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+}
+
+.texto2 {
+    background-color: yellowgreen;
+    color: whitesmoke;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+}
+
+.texto3 {
+    background-color: orangered;
+    color: whitesmoke;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+}
+
+.texto4 {
+    background-color: red;
+    color: whitesmoke;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+}
