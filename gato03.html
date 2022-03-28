@@ -4,110 +4,173 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Links de la font de Google M PLUS 1 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200&family=Inter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo&family=Inter&display=swap" rel="stylesheet">
+
+    <!-- Añadimos css de Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Añadimos íconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <!-- Añadimos modificaciones de estilos propios -->
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Ficha de mascota</title>
+
+    <title>Fundación Ayuda a un peludo</title>
 </head>
 <body>
+
+    <!-- Inicio Barra de navegación -->
     <header>
-        <div class="encabezado">
-            <h1 align="center">
-                Fundación Ayuda a un peludo
-            </h1>
+      <nav class="navbar navbar-expand-lg navbar-dark" id="encabezado">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+              <img src="img/logo-ayuda-a-un-peludo.png" alt="logo ayuda a un peludo" height="50 rem">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Nosotros</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Adopta
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="adop-perros.html">Perros</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item active" href="adop-gatos.html">Gatos</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Colabora</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Servicios
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Asesorías</a></li>
+                  <li><a class="dropdown-item" href="#">Municipalidades</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Veterinaria</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contáctanos</a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
     </header>
-    <div class="miga-de-pan">
-        <a href="index.html">Inicio</a> > <a href="adop-gatos.html">Gatos en adopción</a> > Ficha mascota
-    </div>
-    <div class="texto-encabezado">
-        <h2>
-            <p>Squeechy</p>
-        </h2>
-    </div>
-    <div>
-        <table class="tabla-ficha">
+    <!-- Fin Barra de navegación -->
+
+    <!-- Inicio Miga de pan -->
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb p-2" id="miga-de-pan">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="adop-gatos.html">Gatos en adopción</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Ficha mascota</li>
+      </ol>
+    </nav>
+    <!-- Fin Miga de pan -->
+
+    <!-- Inicio Sección Ficha mascota -->
+    <section class="w-75 mx-auto text-center pt-2">
+      <h1 class="text-secondary">Ficha mascota</h1>
+    </section>
+    <section class="w-75 mx-auto text-left pb-4">
+      <div class="row">
+        <div class="col-auto">
+          <img src="img/gato03.png" alt="imagen ficha mascota" height="300 rem">
+        </div>
+        <div class="col-auto pt-2">
+          <table>
             <tr>
-                <td>
-                    <img src="img/gato03.png" alt="">
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td><b>Nombre</b></td>
-                            <td>:</td>
-                            <td>Squeechy</td>
-                        </tr>
-                        <tr>
-                            <td><b>Edad</b></td>
-                            <td>:</td>
-                            <td>2 años</td>
-                        </tr>
-                        <tr>
-                            <td><b>Raza</b></td>
-                            <td>:</td>
-                            <td>Mestizo</td>
-                        </tr>
-                        <tr>
-                            <td><b>Sexo</b></td>
-                            <td>:</td>
-                            <td>Hembra</td>
-                        </tr>
-                        <tr>
-                            <td><b>Tamaño adulto</b></td>
-                            <td>:</td>
-                            <td>Medio</td>
-                        </tr>
-                        <tr>
-                            <td><b>Se adapta a departamento?</b></td>
-                            <td>:</td>
-                            <td>Sí</td>
-                        </tr>
-                        <tr>
-                            <td><b>Convive con niños?</b></td>
-                            <td>:</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td><b>Convive con otros perros</b></td>
-                            <td>:</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td><b>Convive con gatos?</b></td>
-                            <td>:</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td><b>Nivel de energía</b></td>
-                            <td>:</td>
-                            <td>Muy bajo</td>
-                        </tr>
-                    </table>
-                </td>
+                <td><b>Nombre</b></td>
+                <td>:</td>
+                <td>Squeechy</td>
             </tr>
-        </table>
-    </div>
+            <tr>
+                <td><b>Edad</b></td>
+                <td>:</td>
+                <td>2 años</td>
+            </tr>
+            <tr>
+                <td><b>Raza</b></td>
+                <td>:</td>
+                <td>Mestizo</td>
+            </tr>
+            <tr>
+                <td><b>Sexo</b></td>
+                <td>:</td>
+                <td>Hembra</td>
+            </tr>
+            <tr>
+                <td><b>Tamaño adulto</b></td>
+                <td>:</td>
+                <td>Medio</td>
+            </tr>
+            <tr>
+                <td><b>Se adapta a departamento?</b></td>
+                <td>:</td>
+                <td>Sí</td>
+            </tr>
+            <tr>
+                <td><b>Convive con niños?</b></td>
+                <td>:</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><b>Convive con otros perros</b></td>
+                <td>:</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><b>Convive con gatos?</b></td>
+                <td>:</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><b>Nivel de energía</b></td>
+                <td>:</td>
+                <td>Muy bajo</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- Fin Sección Ficha mascota -->
+
+    <!-- Inicio Pie de página -->
     <footer>
-        <table class="pie-de-pagina">
-            <tr>
-                <td class="direccion">
-                    Fundación Ayuda a un peludo: Avenida Nueva Esperanza 3421 - La Pintana
-                </td>
-                <td class="texto-rrss">
-                    Encuéntranos en:
-                </td>
-                <td class="iconos-rrss">
-                    <a href="#"><img src="img/icono-telefono-footer.png" width="17px" alt=""></a>
-                    <a href="#"><img src="img/icono-whatsapp-footer.png" width="21px" alt=""></a>
-                    <a href="#"><img src="img/icono-facebook-footer.svg" width="20px" alt=""></a>
-                    <a href="#"><img src="img/icono-instagram-footer.svg" width="20px" alt=""></a>
-                    <a href="#"><img src="img/icono-youtube-footer.svg" width="20px" alt=""></a>
-                    <a href="#"><img src="img/icono-twitter-footer.svg" width="20px" alt=""></a>
-                </td>
-            </tr>
-        </table>
+      <div class="container-fluid" id="pie-de-pagina">
+        <div class="row align-items-center">
+          <div class="col-sm-9 fs-6"><span class="d-none d-sm-inline-block">Fundación Ayuda a un peludo:</span> Avenida Nueva Esperanza 2022, La Pintana</div>
+          <div class="col-sm-3 text-start text-sm-end">
+            <span class="d-none d-sm-inline-block">Encuéntranos en:</span>
+            <a href="#" alt="whatsapp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" alt="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" alt="instagram" class="bi bi-instagram"></i></a>
+            <a href="#" alt="youtube"><i class="bi bi-youtube"></i></a>
+            <a href="#" alt="tiktok"><i class="bi bi-tiktok"></i></a>
+          </div>
+      </div>
     </footer>
+    <!-- Fin Pie de página -->
+
+    <!-- Añadimos js de Bootstrap -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

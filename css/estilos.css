@@ -1,60 +1,41 @@
+
+/* Sobreescribimos la fuente de todo el sitio */
 * {
-    font-family: 'Barlow condensed', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Heebo", sans-serif;;
 }
 
-.encabezado {
+#encabezado, #pie-de-pagina {
+
     background-color: indigo;
-    color: whitesmoke;
-    padding: 0.2em 0.2em 0.2em 0.2em;
-    text-align: center;
+    color: ghostwhite;
+
 }
 
-.texto-encabezado {
+footer a {
+    color: ghostwhite;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: lightgray;
+}
+
+div a {
+    text-decoration: none;
+}
+
+div a:hover {
+    color:  lightblue;
+}
+
+#miga-de-pan {
     background-color: plum;
-    color: black;
-    padding: 0.2em 0.2em 0.2em 0.2em;
-    text-align: center;
 }
 
-.miga-de-pan {
-    text-align: left;
-    padding: 10px;
+li a {
+    text-decoration: none;
 }
 
-.pie-de-pagina {
-    background-color: indigo;
-    color: whitesmoke;
-    margin-top: 10px;
-    padding: 5px;
-    width: 100%;
-}
-
-.direccion {
-    text-align: left;
-    vertical-align: middle;
-}
-
-.texto-rrss {
-    text-align: right;
-    vertical-align: top;
-    width: 100px;
-}
-
-.iconos-rrss {
-    text-align: right;
-    width: 140px;
-}
-
-.lista-mascotas {
-    align-items: center;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.fila-mascotas {
-    padding-bottom: 20px;
-}
-
-.tabla-ficha {
-    margin-top: 20px;
+li a:hover {
+    color:  orchid;
 }
