@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Links de la font de Google M PLUS 1 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo&family=Inter&display=swap" rel="stylesheet">
+
+    <!-- Añadimos css de Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Añadimos íconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <!-- Añadimos JQuery -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <!-- Añadimos biblioteca de validación -->
+    <script src="js/validate.min.js"></script>
+
+    <!-- Añadimos modificaciones de estilos propios -->
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        var K_MINCOMENTARIO = 50;
+
+        var Fn = {
+          /* Valida RUT con formato "NNNNNNNN-D" */
+          validaRut : function (rutCompleto) {
+            if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+              return false;
+            var tmp 	= rutCompleto.split('-');
+            var digv	= tmp[1]; 
+            var rut 	= tmp[0];
+            if ( digv == 'K' ) digv = 'k' ;
+            return (Fn.dv(rut) == digv );
+          },
+
+          /*Extrae dígito verificador desde RUT con formato NNNNNNNN-D*/
+          dv : function(T){
+            var M=0,S=1;
+            for(;T;T=Math.floor(T/10))
+            S=(S+T%10*(9-M++%6))%11;
+            return S?S-1:'k';
+          },
+
+          /* Valida correo en base a uso de expresiones regulares */
+          validaCorreo : function(email){
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              return re.test(email);
+          }
+        }
+
+        /* Ocultamos el div con el mensaje de error */
+        $("#error").hide();
+        /* Modificamos el label del tipo de identificación de manera inicial */
+        $("#label-identificacion").text($("#tipo-identificacion").val() + " (*)");
+        /* Modificamos el placeholder del número de identificación de manera inicial */
+        $("#identificacion").attr("placeholder", "(RUT en formato NNNNNNNN-D)");
+        /* Modificamos texto de caracteres faltantes de manera inicial */
+        $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (" + K_MINCOMENTARIO + " restantes)");
+
+        /* Modificamos el label del tipo de identificación de acuerdo a lo que se selecciona */
+        $("#tipo-identificacion").change(function() {
+          $("#label-identificacion").text($("#tipo-identificacion").val() + " (*)");
+
+          if ($("#tipo-identificacion").val().toLowerCase().includes("rut")) {
+            $("#identificacion").attr("placeholder", "(RUT en formato NNNNNNNN-D");
+          } else {
+            $("#identificacion").attr("placeholder", "(Ingrese pasaporte)");
+          }
+
+        })
+
+        var restante = 0;
+        /* Modificamos el caption de caracteres faltantes */
+        $("#comentario").bind("change paste keyup space", function() {
+          restante = K_MINCOMENTARIO - $("#comentario").val().trim().length;
+          console.log(restante);
+
+          if (restante == 1) {
+            $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (1 caracter restante)");
+            return;
+          }
+
+          if (restante > 1) {
+            $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (" + restante + " caracteres restantes)");
+            return;
+          }
+
+          $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres");
+
+        })
+
+        /* Validamos el formulario */
+        $("#formulario").submit(function() {
+          var label;
+          var mensaje = "";
+          var bullet = "<span>&#8226;</span> ";
+
+          /* Validamos que venga un nombre */
+          if ($("#nombre-completo").val().trim().length == 0) {
+            label = $("#label-nombre-completo").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que venga un correo electrónico */
+          if ($("#correo").val().trim().length == 0) {
+            label = $("#label-correo").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que el correo electrónico sea válido */
+          if (Fn.validaCorreo($("#correo").val().trim().toLowerCase()) == false) {
+            label = $("#label-correo").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un correo electrónico válido" + "<br>";
+          }
+
+          /* Validamos que se ingrese identificación */
+          if ($("#identificacion").val().trim().length == 0) {
+            label = $("#label-identificacion").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que el RUT sea válido solo si el tipo de identificación es RUT */
+          if ($("#tipo-identificacion").val().trim().toLowerCase() == "rut") {
+            if (Fn.validaRut($("#identificacion").val().trim()) == false) {
+              label = $("#label-identificacion").text().replace(" (*)", "");
+              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un RUT válido" + "<br>";
+            }
+          }
+
+          /* Validamos que venga una ciudad de residencia */
+          if ($("#ciudad").val().trim().length == 0) {
+            label = $("#label-ciudad").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que venga un comentario  */
+          if ($("#comentario").val().trim().length == 0) {
+            label = $("#label-comentario").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que el comentario tenga al menos 50 caracteres  */
+          if ($("#comentario").val().trim().length < K_MINCOMENTARIO) {
+            mensaje = mensaje + bullet + "<strong>Comentario:</strong> Su comentario debe tener al menos " + K_MINCOMENTARIO + " caracteres." + "<br>";
+          }
+
+          /* Si hay error, lo mostramos y evitamos que se envíe el formulario */
+          if (mensaje != "") {
+              $("#error").html(mensaje);
+              $("#error").show();
+              event.preventDefault();
+          }
+
+        })
+
+        /* Si presiona el botón limpiar, se ocultan también los errores */
+        $("#limpiar").click(function () {
+            $("#error").hide();
+        })
+
+      })
+  </script>
+
+
+    <title>Fundación Ayuda a un peludo</title>
+</head>
+<body>
+
+    <!-- Inicio Barra de navegación -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark" id="encabezado">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+              <img src="img/logo-ayuda-a-un-peludo.png" alt="logo ayuda a un peludo" height="50 rem">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Nosotros</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Adopta
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="adop-perros.html">Perros</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="adop-gatos.html">Gatos</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Colabora</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Servicios
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Asesorías</a></li>
+                  <li><a class="dropdown-item" href="#">Municipalidades</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Veterinaria</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Contáctanos</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- Fin Barra de navegación -->
+
+    <!-- Inicio Miga de pan -->
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb p-2" id="miga-de-pan">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Contáctanos</li>
+      </ol>
+    </nav>
+    <!-- Fin Miga de pan -->
+
+    <!-- Inicio sección contáctanos -->
+    <div class="container-fluid pb-3">
+      <form id="formulario" method="post" action="procesar-formulario.py">
+
+        <div class="row pb-3">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label id="label-nombre-completo" for="nombre-completo">Nombre completo (*)</label>
+              <input type="text" class="form-control form-control-sm" id="nombre-completo" name="nombre-completo" placeholder="(Ingrese nombre completo)">
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+        
+        <div class="row pb-3">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label id="label-correo" for="correo">Correo electrónico (*)</label>
+              <input type="email" class="form-control form-control-sm" id="correo" name="correo" placeholder="(Ingrese correo electrónico)">
+            </div>
+          </div>
+          <div class="col-lg-9"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-6 col-lg-2">
+            <div class="form-group">
+              <label id="label-tipo-identificacion" for="tipo-identificacion">Tipo de identificación (*)</label>
+                <select name="tipo-identificacion" id="tipo-identificacion" class="form-select form-select-sm">
+                  <option selected>RUT</option>
+                  <option>Pasaporte</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-6 col-lg-10"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label id="label-identificacion" for="identificacion">Número de identificación (*)</label>
+              <input type="text" class="form-control form-control-sm" id="identificacion" name="identificacion" placeholder="(Para RUT use formato NNNNNNNN-D)">
+            </div>
+          </div>
+          <div class="col-lg-9"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label id="label-telefono" for="telefono">Teléfono</label>
+              <input type="tel" class="form-control form-control-sm" id="telefono" name="telefono" placeholder="(Formato +56 N NNNN NNNN)">
+            </div>
+          </div>
+          <div class="col-lg-9"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label id="label-ciudad" for="ciudad">Ciudad de residencia (*)</label>
+              <input type="text" class="form-control form-control-sm" id="ciudad" name="ciudad" placeholder="(Ingrese ciudad)">
+            </div>
+          </div>
+          <div class="col-lg-10"></div>
+        </div>
+
+        <div class="row pb-4">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label id="label-comentario" for="comentario">Comentario (*)</label>
+              <textarea class="form-control form-control-sm" id="comentario" rows="3" placeholder="(Comente brevemente en qué le gustaría participar)"></textarea>
+              <figcaption id="caption-comentario" class="figure-caption">Mínimo 50 caracteres</figcaption>
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="enviar">Enviar formulario</button>
+        <button type="reset" class="btn btn-secondary" id="limpiar">Limpiar formulario</button>
+
+        <div id="error" class="alert alert-danger m-2 pt-3" role="alert">Texto de error con alerta</div>
+
+      </form>
+    </div>
+    <!-- Fin sección contáctanos -->
+
+    <!-- Inicio Pie de página -->
+    <footer>
+      <div class="container-fluid" id="pie-de-pagina">
+        <div class="row align-items-center">
+          <div class="col-sm-9 fs-6"><span class="d-none d-sm-inline-block">Fundación Ayuda a un peludo:</span> Avenida Nueva Esperanza 2022, La Pintana</div>
+          <div class="col-sm-3 text-start text-sm-end">
+            <span class="d-none d-sm-inline-block">Encuéntranos en:</span>
+            <a href="#" alt="whatsapp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" alt="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" alt="instagram" class="bi bi-instagram"></i></a>
+            <a href="#" alt="youtube"><i class="bi bi-youtube"></i></a>
+            <a href="#" alt="tiktok"><i class="bi bi-tiktok"></i></a>
+          </div>
+      </div>
+    </footer>
+    <!-- Fin Pie de página -->
+
+    <!-- Añadimos js de Bootstrap -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
