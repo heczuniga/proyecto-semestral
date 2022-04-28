@@ -64,7 +64,7 @@
         /* Modificamos el placeholder del número de identificación de manera inicial */
         $("#identificacion").attr("placeholder", "(RUT en formato NNNNNNNN-D)");
         /* Modificamos texto de caracteres faltantes de manera inicial */
-        $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (" + K_MINCOMENTARIO + " restantes)");
+        $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (Faltan " + K_MINCOMENTARIO + " caracteres)");
 
         /* Modificamos el label del tipo de identificación de acuerdo a lo que se selecciona */
         $("#tipo-identificacion").change(function() {
@@ -85,12 +85,12 @@
           console.log(restante);
 
           if (restante == 1) {
-            $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (1 caracter restante)");
+            $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (Falta 1 caracter)");
             return;
           }
 
           if (restante > 1) {
-            $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (" + restante + " caracteres restantes)");
+            $("#caption-comentario").text("Mínimo " + K_MINCOMENTARIO + " caracteres (Faltan " + restante + " caracteres)");
             return;
           }
 
